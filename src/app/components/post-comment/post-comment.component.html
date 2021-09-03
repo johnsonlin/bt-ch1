@@ -1,0 +1,10 @@
+<div data-automation-id="name" *ngIf="commenterName">
+  <a [href]="'mailto:' + commenterEmail" *ngIf="commenterName && commenterEmail; else nameOnly">
+    <ng-container *ngTemplateOutlet="nameOnly"></ng-container>
+  </a>
+
+  <ng-template #nameOnly>{{ commenterName }}</ng-template>
+</div>
+<div *ngIf="comment">
+  <p data-automation-id="comment">{{ comment }}</p>
+</div>

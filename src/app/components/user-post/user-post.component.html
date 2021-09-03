@@ -1,0 +1,29 @@
+<mat-card class="user-post">
+  <mat-card-title>{{ title }}</mat-card-title>
+
+  <mat-card-content class="user-post__content">
+    <div class="user-post__main-body">
+      <p>{{ body }}</p>
+
+      <div *ngIf="comments && comments.length > 0">
+        <h3 data-automation-id="comment-header">Comments</h3>
+
+        <ul class="user-post__comments">
+          <li class="user-post__comment" *ngFor="let comment of comments">
+            <bt-post-comment [commenterName]="comment.name" [commenterEmail]="comment.email"
+                             [comment]="comment.body"></bt-post-comment>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <button mat-icon-button class="user-post__expand-button" type="button"
+            *ngIf="!postExpanded" (click)="expandPost()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <mat-progress-bar data-automation-id="comments-loading" mode="indeterminate" *ngIf="commentsLoading"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

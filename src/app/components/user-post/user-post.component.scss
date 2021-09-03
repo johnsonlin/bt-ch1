@@ -1,0 +1,29 @@
+.user-post {
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__main-body {
+    flex-grow: 1;
+  }
+
+  &__expand-button {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  &__comments {
+    list-style: none;
+    padding-left: 20px;
+  }
+
+  &__comment {
+    margin-bottom: 10px;
+    border-bottom: 1px solid grey;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}

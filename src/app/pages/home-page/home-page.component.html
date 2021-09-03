@@ -1,0 +1,27 @@
+<section class="home">
+  <mat-spinner class="home__user-loading-indicator" *ngIf="userLoading$ | async"></mat-spinner>
+
+  <div data-automation-id="main-content" *ngIf="users$ && users$ | async as users">
+    <p>Please select a user to find their comments:</p>
+
+    <mat-button-toggle-group class="home__user-list" (change)="getUserPosts($event.value)">
+      <mat-button-toggle class="home__user-list-item" *ngFor="let user of users" [value]="user.id">
+        {{ user.name | firstName }}
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-progress-bar data-automation-id="post-loading" mode="indeterminate" *ngIf="userPostsLoading$ | async"></mat-progress-bar>
+
+    <ul class="home__user-posts" *ngIf="!(userPostsLoading$ | async) && userPostsToShow.length > 0">
+      <li class="home__user-post" *ngFor="let post of userPostsToShow">
+        <bt-user-post [title]="post.title" [body]="post.body" [comments]="postComments[post.id]"
+                      [commentsLoading]="(postCommentsLoading$ | async) === post.id"
+                      (postExpand)="getPostComments(post.id)"></bt-user-post>
+      </li>
+
+      <li class="home__load-all" *ngIf="userPostsToShow.length > 0 && userPosts.length > userPostsToShow.length">
+        <button mat-raised-button color="primary" (click)="showAllPosts()">Load All</button>
+      </li>
+    </ul>
+  </div>
+</section>
